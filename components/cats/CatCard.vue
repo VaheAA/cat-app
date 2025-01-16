@@ -2,7 +2,7 @@
   <div
     class="border rounded-lg shadow-md p-4 bg-white transition-transform hover:scale-105 hover:shadow-lg"
   >
-    <img :src="cat?.url" alt="Cat" class="h-40 w-full object-cover rounded-lg mb-4" />
+    <nuxt-img :src="cat?.url" alt="Cat" class="h-40 w-full object-cover rounded-lg mb-4" />
     <h2 class="text-lg font-semibold text-gray-800 mb-2">
       {{ cat?.breeds[0]?.name || 'Unknown Cat' }}
     </h2>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ICat } from '#shared/types/types'
+import type { ICat } from '#shared/types'
 
 const props = defineProps<{
   cat: ICat | null

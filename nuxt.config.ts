@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@pinia/nuxt', '@nuxt/eslint'],
+  modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/image'],
   imports: {
     dirs: ['stores'],
   },
@@ -19,5 +19,9 @@ export default defineNuxtConfig({
       baseApiUrl: process.env.BASE_API_URL,
       apiKey: process.env.API_KEY,
     },
+  },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 })

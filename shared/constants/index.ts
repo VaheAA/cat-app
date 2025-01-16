@@ -1,4 +1,3 @@
-const LIMIT = 10 as const
+const LIMIT = 12 as const
 
-
-export {LIMIT}
+export { LIMIT }

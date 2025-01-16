@@ -2,7 +2,7 @@
   <div class="px-6 py-8">
     <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">🐾 Welcome To Meow Gallery</h1>
     <div class="min-h-[900px] flex flex-col">
-      <div v-if="isLoading" class="flex-1 flex justify-center items-center">
+      <div v-if="requestStatus === 'pending'" class="flex-1 flex justify-center items-center">
         <loading-spinner />
       </div>
       <div
@@ -33,9 +33,8 @@ import LoadingSpinner from '~/components/app/AppLoader.vue'
 
 const store = useCatStore()
 const { fetchCats, nextPage, previousPage } = store
-const { cats, page, limit, totalCount, isLoading } = storeToRefs(store)
+const { cats, page, limit, totalCount, isLoading, requestStatus } = storeToRefs(store)
 
 const totalPages = computed(() => Math.ceil(totalCount.value / limit.value))
-
 await fetchCats()
 </script>
