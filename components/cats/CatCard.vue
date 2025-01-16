@@ -7,7 +7,7 @@
       {{ cat?.breeds[0]?.name || 'Unknown Cat' }}
     </h2>
     <nuxt-link
-      :to="`/cat/${cat?.id}`"
+      :to="{ name: 'cats-id', params: { id: cat?.id } }"
       class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600 transition-colors"
     >
       View Details

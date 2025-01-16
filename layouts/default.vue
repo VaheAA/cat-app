@@ -2,7 +2,9 @@
   <div class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
     <header class="bg-white shadow-md">
       <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-gray-900">Meow Gallery</h1>
+        <nuxt-link to="/">
+          <h1 class="text-2xl font-bold text-gray-900">Meow Gallery</h1>
+        </nuxt-link>
       </div>
     </header>
 
@@ -17,3 +19,4 @@
     </footer>
   </div>
 </template>
+<script setup lang="ts"></script>
