@@ -14,28 +14,28 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    disabled?: boolean
-    variant?: 'primary' | 'secondary' | 'danger' | 'success'
-    size?: 'small' | 'medium' | 'large'
-  }>(),
-  {
-    variant: 'primary',
-    disabled: false,
-    size: 'medium',
-  },
-)
+type ButtonProps = {
+  disabled?: boolean
+  variant?: 'primary' | 'secondary' | 'danger' | 'success'
+  size?: 'small' | 'medium' | 'large'
+}
+const props = withDefaults(defineProps<ButtonProps>(), {
+  variant: 'primary',
+  disabled: false,
+  size: 'medium',
+})
 
-const emits = defineEmits(['onClick'])
 const { disabled, variant, size } = toRefs(props)
+const emits = defineEmits(['onClick'])
 
+// Emit custom click event to the parent
 const handleClick = () => {
   if (!disabled.value) {
     emits('onClick')
   }
 }
 
+// Default style for different size and variant properties
 const variantStyles: Record<string, string> = {
   primary: 'bg-blue-500 text-white focus:ring-blue-400',
   secondary: 'bg-gray-200 text-gray-800 focus:ring-gray-300',

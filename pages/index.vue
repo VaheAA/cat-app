@@ -15,6 +15,7 @@
         No cats available at the moment. 🐱
       </div>
     </div>
+    <!--  Pagination controls  -->
     <div class="flex justify-between items-center mt-8">
       <app-button variant="secondary" :disabled="isLoading || page === 1" @on-click="previousPage">
         Previous
@@ -35,6 +36,15 @@
 import CatCard from '~/components/cats/CatCard.vue'
 import LoadingSpinner from '~/components/app/AppLoader.vue'
 
+const store = useCatStore()
+const { fetchCats, nextPage, previousPage } = store
+const { cats, page, limit, totalCount, isLoading } = storeToRefs(store)
+
+// Fetch cats, initialize total count for the pagination
+const totalPages = computed(() => Math.ceil(totalCount.value / limit.value))
+await fetchCats()
+
+// Specify meta tags for the home page
 useHead({
   title: 'Meow Gallery',
   meta: [
@@ -44,11 +54,4 @@ useHead({
     },
   ],
 })
-
-const store = useCatStore()
-const { fetchCats, nextPage, previousPage } = store
-const { cats, page, limit, totalCount, isLoading } = storeToRefs(store)
-
-const totalPages = computed(() => Math.ceil(totalCount.value / limit.value))
-await fetchCats()
 </script>

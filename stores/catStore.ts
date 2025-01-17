@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 import type { ICat } from '#shared/types'
 import { LIMIT } from '#shared/constants'
 
+// Initialize store
 export const useCatStore = defineStore('cat', () => {
+  // Create initial values
   const cats = ref<ICat[] | null>([])
   const currentCat = ref<ICat | null>(null)
   const relatedCats = ref<ICat[] | null>([])
@@ -10,8 +12,8 @@ export const useCatStore = defineStore('cat', () => {
   const limit = ref(LIMIT)
   const totalCount = ref(0)
   const isLoading = ref(false)
-  const requestStatus = ref('')
 
+  // Action to fetch cats
   const fetchCats = async () => {
     const config = useRuntimeConfig()
     const { data } = await useLazyFetch<ICat[]>(`${config.public.baseApiUrl}/images/search`, {
@@ -38,7 +40,7 @@ export const useCatStore = defineStore('cat', () => {
 
     cats.value = data.value
   }
-
+  // Action to fetch single cat details based on ID
   const fetchCatDetails = async (id: string) => {
     const config = useRuntimeConfig()
     const { data } = await useFetch<ICat>(`${config.public.baseApiUrl}/images/${id}`, {
@@ -55,7 +57,7 @@ export const useCatStore = defineStore('cat', () => {
 
     currentCat.value = data.value
   }
-
+  // Action to fetch all related cats to the selected one
   const fetchRelatedCats = async (
     breedId: string | undefined,
     currentCatId: string | undefined,
@@ -75,7 +77,7 @@ export const useCatStore = defineStore('cat', () => {
 
     relatedCats.value = (data.value || []).filter((cat) => cat.id !== currentCatId).slice(0, 3)
   }
-
+  // Handle Pagination (next and previous pages)
   const nextPage = async () => {
     if (page.value * limit.value < totalCount.value) {
       page.value += 1
@@ -103,6 +105,5 @@ export const useCatStore = defineStore('cat', () => {
     limit,
     page,
     totalCount,
-    requestStatus,
   }
 })

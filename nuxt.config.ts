@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   },
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/image'],
   imports: {
-    dirs: ['stores'],
+    dirs: ['stores', 'components'],
   },
   runtimeConfig: {
     public: {
