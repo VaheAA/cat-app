@@ -14,7 +14,7 @@ export const useCatStore = defineStore('cat', () => {
 
   const fetchCats = async () => {
     const config = useRuntimeConfig()
-    const { data, status } = await useFetch<ICat[]>(`${config.public.baseApiUrl}/images/search`, {
+    const { data } = await useLazyFetch<ICat[]>(`${config.public.baseApiUrl}/images/search`, {
       headers: {
         'x-api-key': config.public.apiKey,
       } as any,
@@ -23,6 +23,9 @@ export const useCatStore = defineStore('cat', () => {
         page: page.value,
         order: 'DESC',
         has_breeds: true,
+      },
+      onRequest() {
+        isLoading.value = true
       },
       onResponse({ response }) {
         const total = response.headers.get('pagination-count')
@@ -34,26 +37,30 @@ export const useCatStore = defineStore('cat', () => {
     })
 
     cats.value = data.value
-    requestStatus.value = status.value
   }
 
   const fetchCatDetails = async (id: string) => {
     const config = useRuntimeConfig()
-    const { data, status } = await useFetch<ICat>(`${config.public.baseApiUrl}/images/${id}`, {
+    const { data } = await useFetch<ICat>(`${config.public.baseApiUrl}/images/${id}`, {
       headers: {
         'x-api-key': config.public.apiKey,
+      },
+      onRequest() {
+        isLoading.value = true
+      },
+      onResponse() {
+        isLoading.value = false
       },
     })
 
     currentCat.value = data.value
-    requestStatus.value = status.value
   }
 
   const fetchRelatedCats = async (breedId: string | undefined) => {
     if (!breedId) return
     const config = useRuntimeConfig()
 
-    const { data } = await useFetch<ICat[]>(`${config.public.baseApiUrl}/images/search`, {
+    const { data } = await useLazyFetch<ICat[]>(`${config.public.baseApiUrl}/images/search`, {
       headers: {
         'x-api-key': config.public.apiKey,
       },

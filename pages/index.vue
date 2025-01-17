@@ -2,7 +2,7 @@
   <div class="px-6 py-8">
     <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">🐾 Welcome To Meow Gallery</h1>
     <div class="min-h-[900px] flex flex-col">
-      <div v-if="requestStatus === 'pending'" class="flex-1 flex justify-center items-center">
+      <div v-if="isLoading" class="flex-1 flex justify-center items-center">
         <loading-spinner />
       </div>
       <div
@@ -16,11 +16,15 @@
       </div>
     </div>
     <div class="flex justify-between items-center mt-8">
-      <app-button :disabled="isLoading || page === 1" @on-click="previousPage">
+      <app-button variant="secondary" :disabled="isLoading || page === 1" @on-click="previousPage">
         Previous
       </app-button>
       <span class="text-gray-600 text-sm"> Page {{ page }} of {{ totalPages }} </span>
-      <app-button :disabled="isLoading || page * limit >= totalCount" @on-click="nextPage">
+      <app-button
+        variant="secondary"
+        :disabled="isLoading || page * limit >= totalCount"
+        @on-click="nextPage"
+      >
         Next
       </app-button>
     </div>
