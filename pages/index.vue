@@ -27,7 +27,6 @@
     <div class="flex flex-wrap justify-between items-center gap-4 mt-8">
       <app-button
         variant="secondary"
-        size="small"
         :disabled="isLoading || page === 1"
         @on-click="previousPage"
       >
@@ -36,7 +35,6 @@
       <span class="text-sm sm:text-base text-gray-600">Page {{ page }} of {{ totalPages }}</span>
       <app-button
         variant="secondary"
-        size="small"
         :disabled="isLoading || page * limit >= totalCount"
         @on-click="nextPage"
       >
