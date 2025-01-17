@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 py-8">
+  <div class="px-4 md:px-6 py-0 md:py-8">
     <div v-if="isLoading" class="flex-1 flex justify-center items-center">
       <loading-spinner />
     </div>
@@ -12,7 +12,7 @@
         <cat-detail v-if="currentCat" :cat="currentCat" />
         <template v-if="relatedCats?.length">
           <h2 class="text-xl font-semibold text-gray-800 mb-4">Other Cats of the Same Breed</h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <!-- Reusing the card component -->
             <cat-card v-for="relatedCat in relatedCats" :key="relatedCat.id" :cat="relatedCat" />
           </div>
