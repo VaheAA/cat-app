@@ -1,7 +1,8 @@
 <template>
   <button
     :class="[
-      'px-6 py-2 rounded-lg shadow transition-all focus:outline-none focus:ring',
+      'rounded-lg shadow transition-all focus:outline-none focus:ring',
+      sizeStyles[size],
       disabled ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : variantStyles[variant],
       { 'hover:opacity-90': !disabled },
     ]"
@@ -17,15 +18,17 @@ const props = withDefaults(
   defineProps<{
     disabled?: boolean
     variant?: 'primary' | 'secondary' | 'danger' | 'success'
+    size?: 'small' | 'medium' | 'large'
   }>(),
   {
     variant: 'primary',
     disabled: false,
+    size: 'medium',
   },
 )
 
 const emits = defineEmits(['onClick'])
-const { disabled, variant } = toRefs(props)
+const { disabled, variant, size } = toRefs(props)
 
 const handleClick = () => {
   if (!disabled.value) {
@@ -38,5 +41,11 @@ const variantStyles: Record<string, string> = {
   secondary: 'bg-gray-200 text-gray-800 focus:ring-gray-300',
   danger: 'bg-red-500 text-white focus:ring-red-400',
   success: 'bg-green-500 text-white focus:ring-green-400',
+}
+
+const sizeStyles: Record<string, string> = {
+  small: 'px-3 py-1 text-sm',
+  medium: 'px-6 py-2 text-base',
+  large: 'px-8 py-3 text-lg',
 }
 </script>

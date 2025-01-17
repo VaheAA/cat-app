@@ -37,7 +37,12 @@ import LoadingSpinner from '~/components/app/AppLoader.vue'
 
 useHead({
   title: 'Meow Gallery',
-  meta: [{ name: 'description', content: 'Visit our gallery and brighter your days with photos of the cutest cats!' }],
+  meta: [
+    {
+      name: 'description',
+      content: 'Visit our gallery and brighter your days with photos of the cutest cats!',
+    },
+  ],
 })
 
 const store = useCatStore()

@@ -56,7 +56,10 @@ export const useCatStore = defineStore('cat', () => {
     currentCat.value = data.value
   }
 
-  const fetchRelatedCats = async (breedId: string | undefined) => {
+  const fetchRelatedCats = async (
+    breedId: string | undefined,
+    currentCatId: string | undefined,
+  ) => {
     if (!breedId) return
     const config = useRuntimeConfig()
 
@@ -65,12 +68,12 @@ export const useCatStore = defineStore('cat', () => {
         'x-api-key': config.public.apiKey,
       },
       params: {
-        limit: 3,
+        limit: 4,
         breed_id: breedId,
       },
     })
 
-    relatedCats.value = data.value || []
+    relatedCats.value = (data.value || []).filter((cat) => cat.id !== currentCatId).slice(0, 3)
   }
 
   const nextPage = async () => {
