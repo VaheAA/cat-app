@@ -35,9 +35,14 @@
 import CatCard from '~/components/cats/CatCard.vue'
 import LoadingSpinner from '~/components/app/AppLoader.vue'
 
+useHead({
+  title: 'Meow Gallery',
+  meta: [{ name: 'description', content: 'Visit our gallery and brighter your days with photos of the cutest cats!' }],
+})
+
 const store = useCatStore()
 const { fetchCats, nextPage, previousPage } = store
-const { cats, page, limit, totalCount, isLoading, requestStatus } = storeToRefs(store)
+const { cats, page, limit, totalCount, isLoading } = storeToRefs(store)
 
 const totalPages = computed(() => Math.ceil(totalCount.value / limit.value))
 await fetchCats()
